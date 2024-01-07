@@ -1,4 +1,5 @@
 @extends('layouts.template')
+@section('page','/ Data Surat / Lihat')
 @section('content')
 <style>
     .btn-back {

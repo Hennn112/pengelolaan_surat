@@ -15,7 +15,7 @@
             </div>
         @endif
     @endif
-    
+
     <div class="card-body">
         <div class="table-responsive">
 
@@ -56,7 +56,11 @@
                             {{ $item['name']}} <br>
                             @endforeach
                         </td>
-                        <td>{{ $data->user->name }}</td>
+                        @if ($data->user !== null)
+                        <td>{{ $data->user->name}}</td>
+                        @else
+                            <td class="text-danger">Data Guru Sudah Dihapus</td>
+                        @endif
                         @if (Auth::check())
                             @if (Auth::user()->role == 'staff')
                                     <td>

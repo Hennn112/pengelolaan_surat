@@ -134,7 +134,7 @@
                 <!-- End of Topbar -->
                 <div class="container-fluid">
                     @if(Session::get('check'))
-                        <div class="alert alert-success"> {{ Session::get('check') }} </div>
+                        <div class="alert alert-danger"> {{ Session::get('check') }} </div>
                     @endif
                                         <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-start mb-0">
