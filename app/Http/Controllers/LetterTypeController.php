@@ -128,4 +128,19 @@ class LetterTypeController extends Controller
         // Kembalikan atau hasilkan pdf dengan nama tertentu
         return $pdf->download('Rapat.pdf');
     }
+
+    public function klasifikasi(){
+        $klasifikasi = letter_type::onlyTrashed()->get();
+        return view('admin.restore.klasifikasi',compact('klasifikasi'));
+    }
+
+    public function klasifikasis($id){
+        letter_type::withTrashed()->where('id',$id)->restore();
+        return redirect()->back()->with('success', 'Berhasil mengembalikan data');
+    }
+
+    public function deletetype($id){
+        letter_type::onlyTrashed()->where('id',$id)->forceDelete();
+        return redirect()->back()->with('deleted', 'Berhasil Menghapus Data');
+    }
 }

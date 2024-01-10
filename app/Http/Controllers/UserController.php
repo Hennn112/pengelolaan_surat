@@ -200,10 +200,18 @@ class UserController extends Controller
         return redirect()->route('login')->with('logout','anda telah logout!!');
     }
 
-    // public function searchGuru(Request $request){
-    //     $key = $request->date;
-    //     $guru = User::where('name','LIKE',"%$key%")->orwhere('email', 'LIKE', "%$key%");
+    public function user(){
+        $users = User::onlyTrashed()->get();
+        return view('admin.restore.user', compact('users'));
+    }
 
-    //     return view('admin.guru.index', compact("guru"));
-    // }
+    public function users($id){
+        User::withTrashed()->where('id',$id)->restore();
+        return redirect()->back()->with('success', 'Berhasil mengembalikan data');
+    }
+
+    public function deleteuser($id){
+        User::onlyTrashed()->where('id',$id)->forceDelete();
+        return redirect()->back()->with('deleted', 'Berhasil Menghapus Data');
+    }
 }

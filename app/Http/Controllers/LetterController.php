@@ -169,4 +169,19 @@ class LetterController extends Controller
         $file_name = 'Data_Letter'.'.xlsx';
         return Excel::download(new SuratExport, $file_name);
     }
+
+    public function surat(){
+        $surats = letter::onlyTrashed()->get();
+        return view('admin.restore.surat',compact('surats',));
+    }
+
+    public function surats($id){
+        letter::withTrashed()->where('id',$id)->restore();
+        return redirect()->back()->with('success', 'Berhasil mengembalikan data');
+    }
+
+    public function deletesurat($id){
+        letter::onlyTrashed()->where('id',$id)->forceDelete();
+        return redirect()->back()->with('deleted', 'Berhasil Menghapus Data');
+    }
 }

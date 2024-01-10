@@ -79,6 +79,23 @@
                             </div>
                         </div>
                     </li>
+
+                    <!-- Nav Item - Utilities Collapse Menu -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#restore"
+                            aria-expanded="true" aria-controls="restore">
+                            <i class="fas fa-fw fa-newspaper"></i>
+                            <span>Restore Data</span>
+                        </a>
+                        <div id="restore" class="collapse" aria-labelledby="headingUtilities"
+                            data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <a class="collapse-item" href="{{ route('admin.restore.user') }}">Data User</a>
+                                <a class="collapse-item" href="{{ route('admin.restore.klasifikasi') }}">Data Klasifikasi</a>
+                                <a class="collapse-item" href="{{ route('admin.restore.surat') }}">Data Surat</a>
+                            </div>
+                        </div>
+                    </li>
                 @else
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="{{ route('guru.data.index') }}" aria-controls="collapseUtilities">

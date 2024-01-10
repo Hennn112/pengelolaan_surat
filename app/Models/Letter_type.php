@@ -4,10 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class letter_type extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+
+    public $timestaps = true;
 
     protected $fillable = [
         'letter_code',
