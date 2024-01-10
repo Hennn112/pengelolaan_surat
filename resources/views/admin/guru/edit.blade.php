@@ -16,14 +16,14 @@
     <div class="mb-3 row">
         <label for="name" class="col-sm-2 col-form-label">Nama :</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="name" name="name" value="{{ $guru['name'] }}">
+            <input type="text" class="form-control" id="name" name="name" value="{{ ($errors->any()) ? old('name') : $guru['name'] }}">
         </div>
     </div>
 
     <div class="mb-3 row">
         <label for="email" class="col-sm-2 col-form-label">Email :</label>
         <div class="col-sm-10">
-            <input type="email" class="form-control" id="email" name="email" value="{{ $guru['email'] }}">
+            <input type="email" class="form-control" id="email" name="email" value="{{ ($errors->any()) ? old('email') : $guru['email'] }}">
         </div>
     </div>
 

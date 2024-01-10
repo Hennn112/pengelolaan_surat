@@ -16,14 +16,14 @@
     <div class="mb-3 row">
         <label for="name" class="col-sm-2 col-form-label">Kode Surat :</label>
         <div class="col-sm-10">
-            <input type="number" class="form-control" id="name" name="letter_code">
+            <input type="number" class="form-control" id="name" name="letter_code" value="{{ old('letter_code') }}">
         </div>
     </div>
 
     <div class="mb-3 row">
         <label for="email" class="col-sm-2 col-form-label">Klasifikasi Surat</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="email" name="name_type">
+            <input type="text" class="form-control" id="email" name="name_type" value="{{ old('name_type') }}">
         </div>
     </div>
     <button type="submit" class="btn btn-primary mt-3">Tambah Data</button>

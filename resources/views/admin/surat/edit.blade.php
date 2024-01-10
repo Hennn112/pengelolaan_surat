@@ -15,7 +15,7 @@
         <div class="d-flex justify-content-start">
             <div class="form-group">
                 <label for="exampleFormControlInput1">Perihal</label>
-                <input type="text" class="form-control" style="width: 480px" id="exampleFormControlInput1" name="letter_perihal" value="{{ $surats['letter_perihal'] }}">
+                <input type="text" class="form-control" style="width: 480px" id="exampleFormControlInput1" name="letter_perihal" value="{{ ($errors->any()) ? old('letter_perihal') : $surats['letter_perihal'] }}">
             </div>
             <div class="form-group">
                 <label for="exampleFormControlInput1">Klasifikasi Surat</label>

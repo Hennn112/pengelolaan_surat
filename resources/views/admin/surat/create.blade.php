@@ -15,7 +15,7 @@
         <div class="d-flex justify-content-start">
             <div class="form-group">
                 <label for="exampleFormControlInput1">Perihal</label>
-                <input type="text" class="form-control" style="width: 480px" id="exampleFormControlInput1" name="letter_perihal">
+                <input type="text" class="form-control" style="width: 480px" id="exampleFormControlInput1" name="letter_perihal" value="{{ old('letter_perihal') }}">
             </div>
             <div class="form-group">
                 <label for="exampleFormControlInput1">Klasifikasi Surat</label>
@@ -29,7 +29,7 @@
 
         <div class="form-group">
             <label for="exampleFormControlTextarea1">Isi Surat</label>
-            <textarea id="myeditorinstance" name="content"></textarea>
+            <textarea id="myeditorinstance" name="content" aria-valuetext="{{ old('content') }}"></textarea>
         </div>
         <table class="table table-striped table-bordered">
             <tr>
@@ -39,7 +39,6 @@
             @foreach ($role as $item)
             <tr>
                 <td>{{ $item->name }}</td>
-
                 <td>
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" value="{{ $item['id'] }}" id="flexCheckChecked" name="recipients[]">
