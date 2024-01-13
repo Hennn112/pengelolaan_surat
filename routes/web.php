@@ -76,14 +76,14 @@ Route::middleware(['IsLogin', 'IsStaff'])->group(function(){
 
         Route::prefix('/restore')->name('restore.')->group(function(){
             Route::get('/surat',[LetterController::class,'surat'])->name('surat');
-            Route::get('/surat/{id}',[LetterController::class,'surats'])->name('surats');
-            Route::delete('/surat/{id}',[LetterController::class,'deletesurat'])->name('deletesurat');
+            Route::get('/surats/{id?}',[LetterController::class,'surats'])->name('surats');
+            Route::delete('/surat/{id?}',[LetterController::class,'deletesurat'])->name('deletesurat');
             Route::get('/klasifikasi',[LetterTypeController::class,'klasifikasi'])->name('klasifikasi');
-            Route::get('/klasifikasi/{id}',[LetterTypeController::class,'klasifikasis'])->name('klasifikasis');
-            Route::delete('/klasifikasi/{id}',[LetterTypeController::class,'deletetype'])->name('deletetype');
+            Route::get('/klasifikasis/{id?}',[LetterTypeController::class,'klasifikasis'])->name('klasifikasis');
+            Route::delete('/klasifikasi/{id?}',[LetterTypeController::class,'deletetype'])->name('deletetype');
             Route::get('/user',[UserController::class,'user'])->name('user');
-            Route::get('/user/{id}',[UserController::class,'users'])->name('users');
-            Route::delete('/user/{id}',[UserController::class,'deleteuser'])->name('deleteuser');
+            Route::get('/users/{id?}',[UserController::class,'users'])->name('users');
+            Route::delete('/user/{id?}',[UserController::class,'deleteuser'])->name('deleteuser');
         });
     });
 });

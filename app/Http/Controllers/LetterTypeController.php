@@ -134,13 +134,42 @@ class LetterTypeController extends Controller
         return view('admin.restore.klasifikasi',compact('klasifikasi'));
     }
 
-    public function klasifikasis($id){
-        letter_type::withTrashed()->where('id',$id)->restore();
-        return redirect()->back()->with('success', 'Berhasil mengembalikan data');
+    public function klasifikasis($id = null)
+    {
+        if ($id != null) {
+            $letterType = letter_type::withTrashed()->find($id);
+
+            if ($letterType) {
+                $letterType->restore();
+                return redirect()->back()->with('success', 'Berhasil mengembalikan data');
+            } else {
+                return redirect()->back()->with('failed', 'Data tidak ditemukan');
+            }
+        } else {
+            $deletedLetterTypes = letter_type::onlyTrashed()->get();
+
+            if ($deletedLetterTypes->isEmpty()) {
+                return redirect()->back()->with('failed', 'Tidak ada data yang tersedia untuk dikembalikan');
+            } else {
+                letter_type::onlyTrashed()->restore();
+                return redirect()->back()->with('success', 'Berhasil mengembalikan semua data');
+            }
+        }
     }
 
-    public function deletetype($id){
-        letter_type::onlyTrashed()->where('id',$id)->forceDelete();
+
+    public function deletetype($id = null){
+        if ($id != null) {
+            letter_type::onlyTrashed()->where('id',$id)->forceDelete();
+        }else{
+            $deletedLetterTypes = letter_type::onlyTrashed()->get();
+            if ($deletedLetterTypes->isEmpty()) {
+                return redirect()->back()->with('failed', 'Data tidak tersedia');
+                exit;
+            }else{
+                letter_type::onlyTrashed()->forceDelete();
+            }
+        }
         return redirect()->back()->with('deleted', 'Berhasil Menghapus Data');
     }
 }

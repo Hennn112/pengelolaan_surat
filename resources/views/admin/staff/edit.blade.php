@@ -16,21 +16,21 @@
     <div class="mb-3 row">
         <label for="name" class="col-sm-2 col-form-label">Nama :</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="name" name="name" value="{{ $staff['name'] }}">
+            <input type="text" class="form-control" id="name" name="name" value="{{ ($errors->any()) ? old('name') : $staff['name'] }}">
         </div>
     </div>
 
     <div class="mb-3 row">
         <label for="email" class="col-sm-2 col-form-label">Email :</label>
         <div class="col-sm-10">
-            <input type="email" class="form-control" id="email" name="email" value="{{ $staff['email'] }}">
+            <input type="email" class="form-control" id="email" name="email" value="{{ ($errors->any()) ? old('email') : $staff['email'] }}">
         </div>
     </div>
 
     <div class="mb-3 row">
         <label for="password" class="col-sm-2 col-form-label">Password :</label>
         <div class="col-sm-10">
-            <input type="password" class="form-control" id="password" name="password">
+            <input type="password" class="form-control" id="password" name="password" value="{{ old('password') }}">
         </div>
     </div>
 

@@ -191,7 +191,7 @@ class UserController extends Controller
         if (Auth::attempt($user)) {
             return redirect()->route('home.page')->with('succes', 'Berhasil Login');
         }else{
-            return redirect()->back()->with('failed', 'Proses login gagal, silahkan coba kembali dengan data yang benar!');
+            return redirect()->back()->with('failed', 'Proses login gagal, silahkan coba kembali dengan data yang benar!')->withInput();
         }
     }
 
@@ -205,13 +205,35 @@ class UserController extends Controller
         return view('admin.restore.user', compact('users'));
     }
 
-    public function users($id){
-        User::withTrashed()->where('id',$id)->restore();
+    public function users($id = null){
+        if ($id != null) {
+            User::withTrashed()->where('id',$id)->restore();
+        }else{
+            $deletedLetterTypes = User::onlyTrashed()->get();
+            if ($deletedLetterTypes->isEmpty()) {
+                return redirect()->back()->with('failed', 'Data tidak tersedia');
+                exit;
+            }else{
+                User::withTrashed()->restore();
+            }
+        }
+
         return redirect()->back()->with('success', 'Berhasil mengembalikan data');
     }
 
-    public function deleteuser($id){
-        User::onlyTrashed()->where('id',$id)->forceDelete();
+    public function deleteuser($id = null){
+        if ($id != null) {
+            User::onlyTrashed()->where('id',$id)->forceDelete();
+        }else{
+            $deletedLetterTypes = User::onlyTrashed()->get();
+            if ($deletedLetterTypes->isEmpty()) {
+                return redirect()->back()->with('failed', 'Data tidak tersedia');
+                exit;
+            }else{
+                User::onlyTrashed()->forceDelete();
+            }
+
+        }
         return redirect()->back()->with('deleted', 'Berhasil Menghapus Data');
     }
 }

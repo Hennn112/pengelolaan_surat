@@ -152,7 +152,7 @@ class LetterController extends Controller
             'notulis' => $request->notulis
         ]);
 
-        return redirect()->route('admin.surat.index')->with('success','Data berhasil diperbarui');
+        return redirect()->route('admin.surat.index')->with('success','Data berhasil diperbarui')->withInput();
     }
 
     /**
@@ -175,13 +175,33 @@ class LetterController extends Controller
         return view('admin.restore.surat',compact('surats',));
     }
 
-    public function surats($id){
-        letter::withTrashed()->where('id',$id)->restore();
+    public function surats($id = null){
+        if ($id != null) {
+            letter::withTrashed()->where('id',$id)->restore();
+        }else{
+            $deletedLetterTypes = letter_type::onlyTrashed()->get();
+            if ($deletedLetterTypes->isEmpty()) {
+                return redirect()->back()->with('failed', 'Data tidak tersedia');
+                exit;
+            }else{
+                letter::onlyTrashed()->forceDelete();
+            }
+        }
         return redirect()->back()->with('success', 'Berhasil mengembalikan data');
     }
 
-    public function deletesurat($id){
-        letter::onlyTrashed()->where('id',$id)->forceDelete();
+    public function deletesurat($id = null){
+        if ($id != null) {
+            letter::onlyTrashed()->where('id',$id)->forceDelete();
+        }else{
+            $deletedLetterTypes = letter::onlyTrashed()->get();
+            if ($deletedLetterTypes->isEmpty()) {
+                return redirect()->back()->with('failed', 'Data tidak tersedia');
+                exit;
+            }else{
+                letter::onlyTrashed()->forceDelete();
+            }
+        }
         return redirect()->back()->with('deleted', 'Berhasil Menghapus Data');
     }
 }
